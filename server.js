@@ -16,6 +16,12 @@ app.use(logger('dev'));
 app.use(express.static(path.join(__dirname, './client')));
 
 // routes
+app.get('/subscribe', (req, res) => res.sendFile(path.join(__dirname, './client/subscribe.html')));
+app.get('/unsubscribe', (req, res) => res.sendFile(path.join(__dirname, './client/unsubscribe.html')));
+app.get('/like', (req, res) => res.sendFile(path.join(__dirname, './client/like.html')));
+app.get('/follow', (req, res) => res.sendFile(path.join(__dirname, './client/follow.html')));
+app.get('/system', (req, res) => res.sendFile(path.join(__dirname, './client/system.html')));
+
 app.use(require('./notification.route'));
 
 // start app

@@ -23,6 +23,7 @@ Router.post('/subscribe', async (req, res) => {
             title: 'Knowllipop',
             body: 'Thank you for subscripting our service',
             icon: 'http://image.ibb.co/frYOFd/tmlogo.png',
+            url: 'http://localhost:8080/subscribe',
         },
     );
 
@@ -49,6 +50,7 @@ Router.post('/unsubscribe', async (req, res) => {
             title: 'Knowllipop',
             body: 'Thank you for using our service',
             icon: 'http://image.ibb.co/frYOFd/tmlogo.png',
+            url: 'http://localhost:8080/unsubscribe',
         },
     );
 
@@ -76,6 +78,7 @@ Router.post('/follow', async (req, res) => {
             title: 'Knowllipop',
             body: `${data.sourceId} has just follow you`,
             icon: 'http://image.ibb.co/frYOFd/tmlogo.png',
+            url: 'http://localhost:8080/follow',
         },
     );
 
@@ -103,6 +106,7 @@ Router.post('/like', async (req, res) => {
             title: 'Knowllipop',
             body: `${data.sourceId} has just like your video`,
             icon: 'http://image.ibb.co/frYOFd/tmlogo.png',
+            url: 'http://localhost:8080/like',
         },
     );
 
@@ -130,6 +134,7 @@ Router.post('/system', async (req, res) => {
             title: 'Knowllipop',
             body: 'We has just released new feature, check it out',
             icon: 'http://image.ibb.co/frYOFd/tmlogo.png',
+            url: 'http://localhost:8080/system',
         },
     );
 
