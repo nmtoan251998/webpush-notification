@@ -26,3 +26,16 @@ app.use(require('./notification.route'));
 
 // start app
 app.listen(PORT, () => console.log(`Server is started on port: ${PORT}`));
+
+
+var admin = require("firebase-admin");
+
+var serviceAccount = require("./config/serviceAccount.json");
+
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+    databaseURL: "https://knowllipop.firebaseio.com",
+});
+
+const firestore = admin.firestore();
+

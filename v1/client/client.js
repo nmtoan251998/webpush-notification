@@ -7,6 +7,23 @@ function NotificationStrategy(SWInstance, requestData) {
         data: requestData,
     }
 
+    this._welcomebackNotification = async () => {
+        const request = {
+            url: '/welcome-back',
+            method: 'POST',
+            body: JSON.stringify(this.requestObject),
+            headers: {
+                'content-type': 'application/json',
+            }
+        }
+
+        try {
+            fetch(request.url, request);
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
     this._subscribeNotification = async () => {
         const request = {
             url: '/subscribe',
@@ -97,6 +114,7 @@ function NotificationStrategy(SWInstance, requestData) {
         follow: this._followNotification,
         system: this._systemNotification,
         like: this._likeNotification,
+        welcomeback: this._welcomebackNotification,
     };
 }
 
@@ -129,9 +147,35 @@ function urlBase64ToUint8Array(base64String) {
     return outputArray;
 };
 
+async function requestPermission() {
+    console.log('Requesting permission...');
+    // [START request_permission]
+    return Notification.requestPermission().then((permission) => {
+        if (permission === 'granted') {
+            console.log('Notification permission granted.');
+            return true;
+        } else {
+            console.log('Unable to get permission to notify.');
+            return false;
+        }
+    });
+    // [END request_permission]
+}
+
 // check service worker
 if ('serviceWorker' in navigator) {
-    document.querySelector('#subscribe').addEventListener('click', async () => {
+    document.addEventListener('DOMContentLoaded', async () => {
+        // instantiate new SW instance
+        const SWInstance = await registerSW();
+
+        await requestPermission()
+            ? await NotificationStrategy(SWInstance).welcomeback()
+            : console.log;
+    });
+
+
+
+    document.querySelector('#subscribe').addEventListener('click', async (event) => {
         // instantiate new SW instance
         const SWInstance = await registerSW();
 

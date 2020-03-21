@@ -145,4 +145,32 @@ Router.post('/system', async (req, res) => {
     }
 });
 
+/**
+ * system
+ */
+Router.post('/welcome-back', async (req, res) => {
+    // Get push subscription object
+    const {
+        key,
+        data,
+    } = req.body;
+
+    res.status(201).json({});
+
+    const payload = JSON.stringify(
+        {
+            title: 'Knowllipop',
+            body: 'Welcome back, homie!',
+            icon: 'http://image.ibb.co/frYOFd/tmlogo.png',
+            url: 'http://seok.shop:8181',
+        },
+    );
+
+    try {
+        await webpush.sendNotification(key, payload);
+    } catch (e) {
+        console.log(e);
+    }
+});
+
 module.exports = Router;
